@@ -64,6 +64,7 @@ setup (
         'setuptools',
         'z3c.i18n',
         'zope.app.component',
+        'zope.app.publisher',
         'zope.browserpage',
         'zope.schema',
         'zope.traversing',
