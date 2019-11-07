@@ -33,8 +33,9 @@ Now we have to define a context:
   >>> import zope.interface
   >>> from zope.app.container import contained
   >>> from zope.app.container.interfaces import IContained
-  >>> class Content(contained.Contained):
-  ...     zope.interface.implements(IContained)
+  >>> @zope.interface.implementer(IContained)
+  ... class Content(contained.Contained):
+  ...     pass
   >>> root['content'] = Content()
   >>> content = root['content']
 
@@ -42,8 +43,8 @@ Now we have to define a context:
   >>> request = TestRequest()
 
   >>> from zope.publisher.interfaces.browser import IBrowserView
-  >>> class View(contained.Contained):
-  ...     zope.interface.implements(IBrowserView)
+  >>> @zope.interface.implementer(IBrowserView)
+  ... class View(contained.Contained):
   ...     def __init__(self, context, request):
   ...         self.__parent__ = context
   ...         self.context = context
@@ -56,7 +57,7 @@ So initially no menu get rendered:
 
   >>> menu.update()
   >>> menu.render()
-  u''
+  ''
 
 But now we register a context menu item for the `IMenu`:
 
@@ -84,7 +85,7 @@ But now we register a context menu item for the `IMenu`:
 Now see what we get if the IMenu viewlet manager get used:
 
   >>> menu.update()
-  >>> print menu.render()
+  >>> print(menu.render())
   <a href="http://127.0.0.1/content/myLocal.html"
      class="inactive-menu-item">MyLocalLink</a>
 
@@ -110,7 +111,7 @@ GlobalMenu
 Now see what we get if the IMenu viewlet manager get used:
 
   >>> menu.update()
-  >>> print menu.render()
+  >>> print(menu.render())
   <a href="http://127.0.0.1/myGlobal.html"
      class="inactive-menu-item">MyGlobalLink</a>
   <a href="http://127.0.0.1/content/myLocal.html"
@@ -140,7 +141,7 @@ So initially no menu get rendered:
 
   >>> masterMenu.update()
   >>> masterMenu.render()
-  u''
+  ''
 
 Now we register a menu tab which is also a viewlet manager:
 
@@ -155,7 +156,7 @@ Also here, initially no tab get rendered:
 
   >>> myTabs.update()
   >>> myTabs.render()
-  u''
+  ''
 
 Now we register a menu action which is also a viewlet manager:
 
@@ -169,7 +170,7 @@ Also here, initially no tab get rendered:
 
   >>> myActions.update()
   >>> myActions.render()
-  u''
+  ''
 
 After setup the `TabMenu`, `Tab` and `Action` viewlet managers, we start to
 register a tab menu item:
@@ -193,7 +194,7 @@ register a tab menu item:
 Now see what we get if the tab viewlet manager get rendered:
 
   >>> myTabs.update()
-  >>> print myTabs.render()
+  >>> print(myTabs.render())
   <div class="tabMenu">
     <span class="inactive-menu-item">
     <a href="myTab.html">MyTab</a>
@@ -221,7 +222,7 @@ item.
 Now see what we get if the action viewlet manager get used:
 
   >>> myActions.update()
-  >>> print myActions.render()
+  >>> print(myActions.render())
   <div class="actionMenuWrapper">
     <ul class="actionMenu">
       <li class="inactive-menu-item">

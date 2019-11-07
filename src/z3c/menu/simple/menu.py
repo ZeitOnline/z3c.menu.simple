@@ -34,10 +34,9 @@ from z3c.menu.simple.interfaces import IAction
 
 
 # ISimpleMenuItem implementation
+@zope.interface.implementer(ISimpleMenuItem)
 class SimpleMenuItem(viewlet.ViewletBase):
     """Selectable menu item."""
-
-    zope.interface.implements(ISimpleMenuItem)
 
     template = ViewPageTemplateFile('menu_item.pt')
 
@@ -120,9 +119,9 @@ class GlobalMenuItem(SimpleMenuItem):
 
 
 # ITabMenu implementation
+@zope.interface.implementer(ITabMenu)
 class TabMenu(object):
     """Tab menu offering tabs and actions."""
-    zope.interface.implements(ITabMenu)
 
     def __init__(self, context, request, view):
         self.__parent__ = view
@@ -154,9 +153,9 @@ class TabMenu(object):
         return result
 
 
+@zope.interface.implementer(ITab)
 class Tab(manager.WeightOrderedViewletManager):
     """Tab Menu"""
-    zope.interface.implements(ITab)
 
     def render(self):
         """Return the template with the option 'menus'"""
@@ -165,17 +164,16 @@ class Tab(manager.WeightOrderedViewletManager):
         return self.template()
 
 
+@zope.interface.implementer(ISimpleMenuItem)
 class TabItem(SimpleMenuItem):
     """Base implementation for menu items."""
-
-    zope.interface.implements(ISimpleMenuItem)
 
     template = ViewPageTemplateFile('tab_item.pt')
 
 
+@zope.interface.implementer(IAction)
 class Action(manager.WeightOrderedViewletManager):
     """Action Menu"""
-    zope.interface.implements(IAction)
 
     def render(self):
         """Return the template with the option 'menus'"""
@@ -184,10 +182,9 @@ class Action(manager.WeightOrderedViewletManager):
         return self.template()
 
 
+@zope.interface.implementer(ISimpleMenuItem)
 class ActionItem(SimpleMenuItem):
     """Base implementation for action items."""
-
-    zope.interface.implements(ISimpleMenuItem)
 
     template = ViewPageTemplateFile('action_item.pt')
 
