@@ -46,7 +46,7 @@ class ISimpleMenuItem(IViewlet):
         description=_(u'Extra values usefull for custom attributes.'),
         key_type=zope.schema.TextLine(title=u'Key'),
         value_type=zope.schema.TextLine(title=u'Value')
-        )
+    )
 
     selected = zope.schema.Bool(
         title=_(u"Required"),
@@ -80,7 +80,3 @@ class ITabItem(ISimpleMenuItem):
 
 class IAction(IViewletManager):
     """Menu controlling the action items."""
-
-
-class ITabItem(ISimpleMenuItem):
-    """Action menu item."""

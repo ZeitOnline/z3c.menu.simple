@@ -20,7 +20,6 @@ import unittest
 import zope.security
 import doctest
 from zope.app.testing import setup, ztapi
-from zope.app.testing import functional
 
 
 class TestParticipation(object):
@@ -31,7 +30,6 @@ class TestParticipation(object):
 def setUp(test):
     root = setup.placefulSetUp(site=True)
     test.globs['root'] = root
-
 
     # resource namespace setup
     from zope.traversing.interfaces import ITraversable
@@ -55,6 +53,6 @@ def test_suite():
         doctest.DocFileSuite(
             'README.txt',
             setUp=setUp, tearDown=tearDown,
-            optionflags=doctest.NORMALIZE_WHITESPACE|doctest.ELLIPSIS,
-            ),
-        ))
+            optionflags=doctest.NORMALIZE_WHITESPACE | doctest.ELLIPSIS,
+        ),
+    ))

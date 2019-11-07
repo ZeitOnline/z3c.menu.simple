@@ -16,6 +16,6 @@ $Id: __init__.py 69409 2006-08-11 17:17:37Z rogerineichen $
 """
 __docformat__ = "reStructuredText"
 
-from z3c.menu.simple.interfaces import ITabMenu
-from z3c.menu.simple.interfaces import ITab
-from z3c.menu.simple.interfaces import IAction
+from z3c.menu.simple.interfaces import ITabMenu # noqa
+from z3c.menu.simple.interfaces import ITab # noqa
+from z3c.menu.simple.interfaces import IAction # noqa

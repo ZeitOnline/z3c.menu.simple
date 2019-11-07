@@ -22,7 +22,6 @@ from zope.contentprovider.interfaces import IContentProvider
 from zope.viewlet import viewlet
 from zope.viewlet import manager
 from zope.app.component import hooks
-from zope.app.publisher.browser import menu
 from zope.app.publisher.interfaces.browser import IBrowserMenu
 from zope.browserpage.viewpagetemplatefile import ViewPageTemplateFile
 from zope.traversing.browser.absoluteurl import absoluteURL
@@ -191,7 +190,6 @@ class ActionItem(SimpleMenuItem):
     zope.interface.implements(ISimpleMenuItem)
 
     template = ViewPageTemplateFile('action_item.pt')
-
 
 
 class BrowserMenu(TabMenu):
