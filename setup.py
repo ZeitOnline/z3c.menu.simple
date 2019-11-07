@@ -23,7 +23,7 @@ def read(*rnames):
 
 setup (
     name='z3c.menu.simple',
-    version='0.6.0+py3.1',
+    version='0.6.0+py3.2',
     author = "Stephan Richter, Roger Ineichen and the Zope Community",
     author_email = "zope-dev@zope.org",
     description = "A simple menu system for Zope3",
