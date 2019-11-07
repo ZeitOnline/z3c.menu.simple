@@ -16,10 +16,31 @@ $Id: tests.py 114728 2010-07-14 06:53:53Z icemac $
 """
 __docformat__ = 'restructuredtext'
 
+import re
 import unittest
 import zope.security
 import doctest
 from zope.app.testing import setup, ztapi
+
+
+# Strip out u'' literals in doctests, adapted from
+# <https://stackoverflow.com/a/56507895>.
+class Py23OutputChecker(doctest.OutputChecker, object):
+    RE = re.compile(r"(\W|^)[uU]([rR]?[\'\"])", re.UNICODE)
+
+    def remove_u(self, want, got):
+        return (re.sub(self.RE, r'\1\2', want),
+                re.sub(self.RE, r'\1\2', got))
+
+    def check_output(self, want, got, optionflags):
+        want, got = self.remove_u(want, got)
+        return super(Py23OutputChecker, self).check_output(
+            want, got, optionflags)
+
+    def output_difference(self, example, got, optionflags):
+        example.want, got = self.remove_u(example.want, got)
+        return super(Py23OutputChecker, self).output_difference(
+            example, got, optionflags)
 
 
 class TestParticipation(object):
@@ -53,6 +74,7 @@ def test_suite():
         doctest.DocFileSuite(
             'README.txt',
             setUp=setUp, tearDown=tearDown,
+            checker=Py23OutputChecker(),
             optionflags=doctest.NORMALIZE_WHITESPACE | doctest.ELLIPSIS,
         ),
     ))
